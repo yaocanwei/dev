@@ -4,18 +4,16 @@ source 'http://ruby.taobao.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
-# Use sqlite3 as the database for Active Record
-#gem 'sqlite3'
+#capybara这个gem允许我们使用类似英语中的句法编写模拟与应用程序交互的代码
 group :development,:test do
   gem 'sqlite3'
-  gem 'rspec-rails'
+  gem 'rspec-rails', "~>2.14.1"
+  gem 'pry'
+  gem 'pry-debugger'
+  gem 'selenium-webdriver', '2.35.1'
+  gem 'capybara', '2.1.0'
 end
 
-#capybara这个gem允许我们使用类似英语中的句法编写模拟与应用程序交互的代码
-group :test do
-  gem 'selenium-webdriver'
-  gem 'capybara'
-end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
