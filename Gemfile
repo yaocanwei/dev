@@ -12,6 +12,7 @@ group :development,:test do
   gem 'pry-debugger'
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.1.0'
+  gem 'guard-rspec', '2.5.0'
 end
 
 # Use SCSS for stylesheets
@@ -43,9 +44,5 @@ end
 # gem 'bcrypt', '~> 3.1.7'
 
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
 
