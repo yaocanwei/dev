@@ -4,6 +4,8 @@ source 'http://ruby.taobao.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
+#bootstrap
+gem 'bootstrap-sass', '2.3.2.0'
 #capybara这个gem允许我们使用类似英语中的句法编写模拟与应用程序交互的代码
 group :development,:test do
   gem 'sqlite3'
