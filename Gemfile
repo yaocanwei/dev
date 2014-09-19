@@ -17,6 +17,9 @@ group :development,:test do
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.1.0'
   gem 'guard-rspec', '2.5.0'
+  #fake data generation
+  gem 'factory_girl_rails', '4.2.1'
+  gem 'faker'
 end
 
 # Use SCSS for stylesheets
@@ -46,7 +49,12 @@ end
 
 # Use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.1.0'
+# Use debugger
+ gem 'debugger', group: [:development, :test]
 
+#分页
+gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-bootstrap'
 
 
 

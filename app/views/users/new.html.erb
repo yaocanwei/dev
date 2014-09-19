@@ -1,3 +1,35 @@
 <%provide(:title, 'Sign up')%>
 <h1>Sign up</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<div class="row">
+  <div class="span6 offset3" >
+    <%= form_for @user, url: { action: "create" } do|f|%>
+      <%= render 'shared/error_messages'%>
+
+      <%= f.label :name, class: "control-label" do%>
+        <abbr class="required">*</abbr>
+        用户名<br />
+      <% end %>
+      <%= f.text_field :name%>
+
+      <%= f.label :email, class: "control-label" do%>
+        <abbr class="required">*</abbr>
+        邮箱<br />
+      <%end%>
+      <%= f.text_field :email%>
+
+      <%= f.label :password, class: "control-label" do%>
+        <abbr class="required">*</abbr>
+        密码输入<br />
+      <% end %>
+      <%= f.text_field :password, :placeholder => "密码长度至少6位"%>
+
+      <%= f.label :password_confirmation, class: "control-label" do%>
+        <abbr class="required">*</abbr>
+        确认密码<br />
+      <% end %>
+      <%= f.text_field :password_confirmation%>
+
+      <%= f.submit "创建帐号", class: "btn btn-large btn-primary"%>
+    <% end %>
+  </div>
+</div>
