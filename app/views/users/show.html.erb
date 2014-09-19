@@ -1,0 +1,12 @@
+<%provide(:title, @user.name)%>
+<div calss="row">
+  <aside calss="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @user%>
+        <%= @user.email%>
+        <%= @user.name%>
+      </h1>
+    </section>
+  </aside>
+</div>
