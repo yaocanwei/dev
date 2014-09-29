@@ -26,13 +26,18 @@ describe '用户界面' do
         expect { click_button submit }.not_to change(User, :count)
 
       end
+      describe "after submission" do
+        before { click_button submit }
+        it{ should have_title('Sign up') }
+        it{ should have_content('error') }
+      end
     end
 
     describe "with valid information" do
 
       before do
         fill_in "用户名",  with: "YCanwei"
-        fill_in "邮箱", with: "a1248014498@gmail.com"
+        fill_in "邮箱", with: "1248014498@qq.com"
         fill_in "密码输入", with: "foobar"
         fill_in "确认密码", with: "foobar"
       end
@@ -40,6 +45,14 @@ describe '用户界面' do
       #When it register successfully, the database can create a new user.
       it "should create a user" do
         expect{ click_button submit }.to change(User, :count).by(1)
+      end
+      describe "after saving the user" do
+        before { click_button submit }
+        let(:user) { User.find_by(email: '1248014498@qq.com') }
+
+        it { should have_link('Sign out')}
+        it { should have_title(user.name) }
+        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
       end
     end
   end

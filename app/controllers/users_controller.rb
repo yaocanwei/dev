@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     puts "valid? = #{ @user.valid?.inspect }"
 
     if @user.save
+      sign_in @user
       flash[:success] = "Welcome to the new World!"
       puts "saved!"
       redirect_to @user

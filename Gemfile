@@ -20,6 +20,9 @@ group :development,:test do
   #fake data generation
   gem 'factory_girl_rails', '4.2.1'
   gem 'faker'
+  #cucumber
+  gem 'cucumber-rails', '1.4.0', :require => false
+  gem 'database_cleaner', github: 'bmabey/database_cleaner'
 end
 
 # Use SCSS for stylesheets
