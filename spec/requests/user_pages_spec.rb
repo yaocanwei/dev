@@ -26,25 +26,20 @@ describe '用户界面' do
         expect { click_button submit }.not_to change(User, :count)
 
       end
-<<<<<<< HEAD
-=======
+
       describe "after submission" do
         before { click_button submit }
         it{ should have_title('Sign up') }
         it{ should have_content('error') }
       end
->>>>>>> sign-in-out
     end
 
     describe "with valid information" do
 
       before do
         fill_in "用户名",  with: "YCanwei"
-<<<<<<< HEAD
-        fill_in "邮箱", with: "a1248014498@gmail.com"
-=======
+        #fill_in "邮箱", with: "a1248014498@gmail.com"
         fill_in "邮箱", with: "1248014498@qq.com"
->>>>>>> sign-in-out
         fill_in "密码输入", with: "foobar"
         fill_in "确认密码", with: "foobar"
       end
@@ -53,8 +48,7 @@ describe '用户界面' do
       it "should create a user" do
         expect{ click_button submit }.to change(User, :count).by(1)
       end
-<<<<<<< HEAD
-=======
+
       describe "after saving the user" do
         before { click_button submit }
         let(:user) { User.find_by(email: '1248014498@qq.com') }
@@ -63,7 +57,6 @@ describe '用户界面' do
         it { should have_title(user.name) }
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
       end
->>>>>>> sign-in-out
     end
   end
 end
