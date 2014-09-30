@@ -59,4 +59,20 @@ describe '用户界面' do
       end
     end
   end
+  describe "编辑用户资料" do
+    let(:user) { FactoryGirl.create(:user) }
+    before { visit edit_user_path(user) }
+
+    describe "页面描述" do
+      it{ should have_content("Update your profile") }
+      it{ should have_title("Edit user") }
+      it{ should have_link('change', href: 'http://gravatar.com/emails') }
+    end
+
+    describe "with invalid information" do
+      before { click_button 'Save changes' }
+
+      it{ should have_content('error') }
+    end
+  end
 end
