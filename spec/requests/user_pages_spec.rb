@@ -61,12 +61,33 @@ describe '用户界面' do
   end
   describe "编辑用户资料" do
     let(:user) { FactoryGirl.create(:user) }
-    before { visit edit_user_path(user) }
+    before do
+      sign_in user
+      visit edit_user_path(user)
+    end
 
     describe "页面描述" do
       it{ should have_content("Update your profile") }
       it{ should have_title("Edit user") }
       it{ should have_link('change', href: 'http://gravatar.com/emails') }
+    end
+
+    describe "with valid information" do
+      let(:new_name) { "Mark" }
+      let(:new_email) { "18824864765@gmail.com" }
+      before do
+        fill_in "Name",    with: new_name 
+        fill_in "Email",   with: new_email
+        fill_in "Password", with: user.password
+        fill_in "Confirm Password", with: user.password
+        click_button "Save changes"
+
+        it { should haveø_title(new_name) }
+        it { should_have_selector('div.alert.alert-success') }
+        it { should have_link('Sign out', href: signout_path)}
+        specify { expect(user.reload.name).to eq new_name }
+        specify { expect(user.reload.email).to eq new_email }
+      end
     end
 
     describe "with invalid information" do
