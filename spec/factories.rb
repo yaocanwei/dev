@@ -16,5 +16,11 @@ FactoryGirl.define do
     factory :admin do
       admin true
     end
+
+    factory :micropost do
+      content "Lorem ipsum"
+      #在预构件为微薄和用户建立关联
+      user
+    end
   end
 end

@@ -22,6 +22,7 @@ group :development,:test do
   #cucumber
   gem 'cucumber-rails', '1.4.0', :require => false
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
+  gem 'hirb'
 end
 
 # Use SCSS for stylesheets
@@ -51,6 +52,7 @@ group :production do
 end
 
 # Use ActiveModel has_secure_password
+#使用先进的哈希函数bcrypt对密码进行不可逆的加密，得到密码哈希值。
  gem 'bcrypt-ruby', '~> 3.1.0'
 # Use debugger
  gem 'debugger', group: [:development, :test]
