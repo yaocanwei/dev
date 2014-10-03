@@ -35,7 +35,8 @@ describe "Authentication" do
         click_link "Account"
       end
       it { should have_title(user.name) }
-      it { should have_link('Profile',     href: user_path(user)), visiable: false }
+      it { should have_link('Users', href: users_path) }
+      it { should have_link('Profile',     href: user_path(user)) }
       it { should have_link('Settings', href: edit_user_path(user)) }
       it { should have_link('Sign out',    href: signout_path) }
       it { should_not have_link('Sign in', href: signin_path) }
@@ -45,6 +46,21 @@ describe "Authentication" do
   describe "authorization" do
     describe "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
+
+      describe "when attempting to visit a protected page" do
+        before do
+          visit edit_user_path(user)
+          fill_in "Email", with: user.email
+          fill_in "Password", with: user.password
+          click_button "Sign in"
+        end
+
+        describe "after signing in" do
+          it "should render the desired protected page" do
+            expect(page).to have_title('Edit user')
+          end
+        end
+      end
 
       describe "in the Users controller" do
         describe "visiting the edit page" do
@@ -56,6 +72,24 @@ describe "Authentication" do
           before { patch user_path(user) }
           specify { expect(response).to redirect_to(signin_path) }
         end
+
+        #index action was protected, when non_signed was visit the page, it should
+        #redirect_to to the sign_in page
+        describe "visiting the user index" do
+          before { visit users_path }
+          it { should have_title('Sign in') }
+        end
+      end
+    end
+
+    describe "as no-admin user" do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:non_admin) { FactoryGirl.create(:user) }
+      before { sign_in non_admin, no_capybara: true}
+
+      describe "submitting a Delete request to the Users#destroy action" do
+        before { delete user_path(user) }
+        specify { expect(response).to redirect_to(root_path) }
       end
     end
 

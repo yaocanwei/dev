@@ -1,7 +1,71 @@
 require 'spec_helper'
 
 describe '用户界面' do
+
   subject { page }
+
+  #用户列表
+  describe "index" do
+    #before do
+      #sign_in FactoryGirl.create(:user)
+      #FactoryGirl.create(:user, name: "Bob", email: "bob@example.com") 
+      #FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
+      ##10.times do
+        ##FactoryGirl.create(:user)
+      ##end
+      #visit users_path
+    #end
+    let(:user) { FactoryGirl.create(:user) }
+    before(:each) do
+      sign_in user
+      visit users_path
+    end
+
+    describe "pagination" do
+      before(:all) { 30.times { FactoryGirl.create(:user) } }
+      after(:all) { User.delete_all }
+
+      it{ should have_selector('div.pagination') }
+      it "should list each user" do
+        User.paginate(page: 1).each do|user|
+          expect(page).to have_selector('li', text: user.name)
+        end
+      end
+    end
+
+    describe "delete links" do
+      it { should_not have_link('delete') }
+
+      describe "as an admin user" do
+        let(:admin) { FactoryGirl.create(:admin) }
+
+        before do
+          sign_in admin
+          visit users_path
+        end
+
+        it{ should have_link('删除', href: user_path(User.first)) }
+        it "should be able to delete another user" do
+          expect do
+            #match: :first删除第一次点击的
+            click_link('删除', match: :first)
+          end.to change(User, :count).by(-1)
+        end
+
+        it { should_not have_link('delete', href: user_path(admin)) }
+      end
+    end
+
+    it { should have_title('All users') }
+    it { should have_content('All users')}
+
+    it "should list each user" do
+      User.all.each do |user|
+        expect(page).to have_selector('li', text: user.name)
+      end
+    end
+  end
+
   describe 'signup page' do
     before { visit signup_path }
     it { should have_content('Sign up') }

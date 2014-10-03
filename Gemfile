@@ -6,7 +6,6 @@ source 'http://ruby.taobao.org'
 gem 'rails', '4.1.0'
 #bootstrap
 gem 'bootstrap-sass', '2.3.2.0'
-#使用先进的哈希函数bcrypt对密码进行不可逆的加密，得到密码哈希值。
 #gem 'bcrypt-ruby', '3.0.1'
 #capybara这个gem允许我们使用类似英语中的句法编写模拟与应用程序交互的代码
 group :development,:test do
