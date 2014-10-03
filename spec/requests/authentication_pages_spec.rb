@@ -60,6 +60,23 @@ describe "Authentication" do
             expect(page).to have_title('Edit user')
           end
         end
+
+        describe "when signing in again" do
+          before do
+            #click_link signout_path
+            page.driver.submit :delete, '/users/sign_out', {}
+            print  page.html
+            visit  signin_path
+            print  page.html
+            fill_in "Email", with: user.email
+            fill_in "Password", with: user.password
+            click_button "Sign in"
+          end
+          
+          it "should render the default(profile) page" do
+            expect(page).to have_title(user.name)
+          end
+        end
       end
 
       describe "in the Users controller" do
